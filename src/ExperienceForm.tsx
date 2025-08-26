@@ -1,11 +1,29 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
-export default function ExperienceForm({ onSave }: { onSave: (exp: any) => void }) {
-  const [exp, setExp] = useState({ company: "", role: "", location: "", start: "", end: "", desc: "" });
+export default function ExperienceForm({
+  onSave,
+}: {
+  onSave: (exp: any) => void;
+}) {
+  const [exp, setExp] = useState({
+    company: "",
+    role: "",
+    location: "",
+    start: "",
+    end: "",
+    desc: "",
+  });
 
   const handleSave = () => {
     onSave(exp);
-    setExp({ company: "", role: "", location: "", start: "", end: "", desc: "" });
+    setExp({
+      company: "",
+      role: "",
+      location: "",
+      start: "",
+      end: "",
+      desc: "",
+    });
   };
 
   return (
@@ -48,7 +66,9 @@ export default function ExperienceForm({ onSave }: { onSave: (exp: any) => void 
         value={exp.desc}
         onChange={(e) => setExp({ ...exp, desc: e.target.value })}
       />
-      <button className="btn btn-primary" onClick={handleSave}>Save</button>
+      <button className="btn btn-primary" onClick={handleSave}>
+        Save
+      </button>
     </div>
   );
 }
