@@ -1,10 +1,8 @@
-
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Drawer } from "vaul";
 import html2pdf from "html2pdf.js";
-import './index.css'; 
-
+import "./index.css";
 
 interface Experience {
   company: string;
@@ -67,6 +65,22 @@ function App() {
   const [skills, setSkills] = useState<Skill[]>([]);
   const [languages, setLanguages] = useState<Language[]>([]);
   const [showResume, setShowResume] = useState(false);
+  const [darkMode, setDarkMode] = useState(false);
+
+
+  useEffect(() => {
+    if (darkMode) {
+      document.body.classList.add("dark-mode");
+    } else {
+      document.body.classList.remove("dark-mode");
+    }
+  }, [darkMode]);
+  
+
+  useEffect(() => {
+    document.body.style.backgroundColor = darkMode ? "#121212" : "#ffffff";
+    document.body.style.color = darkMode ? "#ffffff" : "#000000";
+  }, [darkMode]);
 
   const [form, setForm] = useState<Experience>({
     company: "",
@@ -126,7 +140,14 @@ function App() {
     <div className="container my-4">
       <div className="row">
         <div className="col-md-4">
-          <div className=" mt-4 card p-3">
+          <button
+            className="btn btn-secondary mb-3"
+            onClick={() => setDarkMode(!darkMode)}
+          >
+            {darkMode ? "Light Mode" : "Dark Mode"}
+          </button>
+
+          <div className=" mt-4 card p-3 ">
             <h5 className="mb-3">General</h5>
             <input
               className="form-control mb-2"
@@ -201,7 +222,7 @@ function App() {
             />
           </div>
           <button
-            className=" mt-3   btn btn-outline-primary w-100"
+            className=" mt-3   btn btn-outline-secondary w-100"
             onClick={() => setShowResume(true)}
           >
             + ALL SAVE
@@ -224,13 +245,13 @@ function App() {
           </ul>
           <Drawer.Root open={expOpen} onOpenChange={setExpOpen}>
             <Drawer.Trigger asChild>
-              <button className="btn btn-outline-primary w-100">
+              <button className="btn btn-outline-secondary w-100">
                 + Add new item
               </button>
             </Drawer.Trigger>
             <Drawer.Portal>
               <Drawer.Overlay className="fixed inset-0 bg-black/40" />
-              <Drawer.Content className="bg-white flex flex-col fixed bottom-0 left-0 right-0 max-h-[82vh] rounded-t-[10px]">
+              <Drawer.Content className="bg-secondaryx flex flex-col fixed bottom-0 left-0 right-0 max-h-[82vh] rounded-t-[10px]">
                 <div className="max-w-md w-full mx-auto overflow-auto p-4">
                   <Drawer.Handle />
                   <Drawer.Title className="font-medium text-gray-900 my-6">
@@ -292,7 +313,7 @@ function App() {
                     }
                   ></textarea>
                   <button
-                    className=" btn btn-dark w-100"
+                    className=" btn btn-secondary w-100"
                     onClick={() => {
                       setExperiences([form, ...experiences]);
                       setForm({
@@ -328,13 +349,13 @@ function App() {
           </ul>
           <Drawer.Root open={projOpen} onOpenChange={setProjOpen}>
             <Drawer.Trigger asChild>
-              <button className="btn btn-outline-primary w-100">
+              <button className="btn btn-outline-secondary w-100">
                 + Add new item
               </button>
             </Drawer.Trigger>
             <Drawer.Portal>
               <Drawer.Overlay className="fixed inset-0 bg-black/40" />
-              <Drawer.Content className="bg-white flex flex-col fixed bottom-0 left-0 right-0 max-h-[82vh] rounded-t-[10px]">
+              <Drawer.Content className="bg-secondaryx flex flex-col fixed bottom-0 left-0 right-0 max-h-[82vh] rounded-t-[10px]">
                 <div className="max-w-md w-full mx-auto overflow-auto p-4">
                   <Drawer.Handle />
                   <Drawer.Title className="font-medium text-gray-900 my-6">
@@ -365,7 +386,7 @@ function App() {
                     }
                   />
                   <button
-                    className="btn btn-dark w-100"
+                    className="btn btn-secondary w-100"
                     onClick={() => {
                       setProjects([projForm, ...projects]);
                       setProjForm({ title: "", description: "", link: "" });
@@ -394,13 +415,13 @@ function App() {
           </ul>
           <Drawer.Root open={eduOpen} onOpenChange={setEduOpen}>
             <Drawer.Trigger asChild>
-              <button className="btn btn-outline-primary w-100">
+              <button className="btn btn-outline-secondary w-100">
                 + Add new item
               </button>
             </Drawer.Trigger>
             <Drawer.Portal>
               <Drawer.Overlay className="fixed inset-0 bg-black/40" />
-              <Drawer.Content className="bg-white flex flex-col fixed bottom-0 left-0 right-0 max-h-[82vh] rounded-t-[10px]">
+              <Drawer.Content className="bg-secondaryx flex flex-col fixed bottom-0 left-0 right-0 max-h-[82vh] rounded-t-[10px]">
                 <div className="max-w-md w-full mx-auto overflow-auto p-4">
                   <Drawer.Handle />
                   <Drawer.Title className="font-medium text-gray-900 my-6">
@@ -423,15 +444,16 @@ function App() {
                     }
                   />
                   <input
+                  type="date"
                     className="form-control mb-3"
-                    placeholder="Year"
+                    placeholder="date"
                     value={eduForm.year}
                     onChange={(e) =>
                       setEduForm({ ...eduForm, year: e.target.value })
                     }
                   />
                   <button
-                    className="btn btn-dark w-100"
+                    className="btn btn-secondary w-100"
                     onClick={() => {
                       setEducations([eduForm, ...educations]);
                       setEduForm({ school: "", degree: "", year: "" });
@@ -460,13 +482,13 @@ function App() {
           </ul>
           <Drawer.Root open={skillOpen} onOpenChange={setSkillOpen}>
             <Drawer.Trigger asChild>
-              <button className="btn btn-outline-primary w-100">
+              <button className="btn btn-outline-secondary w-100">
                 + Add new item
               </button>
             </Drawer.Trigger>
             <Drawer.Portal>
               <Drawer.Overlay className="fixed inset-0 bg-black/40" />
-              <Drawer.Content className="bg-white flex flex-col fixed bottom-0 left-0 right-0 max-h-[82vh] rounded-t-[10px]">
+              <Drawer.Content className="bg-secondaryx flex flex-col fixed bottom-0 left-0 right-0 max-h-[82vh] rounded-t-[10px]">
                 <div className="max-w-md w-full mx-auto overflow-auto p-4">
                   <Drawer.Handle />
                   <Drawer.Title className="font-medium text-gray-900 my-6">
@@ -479,7 +501,7 @@ function App() {
                     onChange={(e) => setSkillForm({ skill: e.target.value })}
                   />
                   <button
-                    className="btn btn-dark w-100"
+                    className="btn btn-secondary w-100"
                     onClick={() => {
                       setSkills([skillForm, ...skills]);
                       setSkillForm({ skill: "" });
@@ -507,59 +529,72 @@ function App() {
             ))}
           </ul>
           <Drawer.Root open={langOpen} onOpenChange={setLangOpen}>
-            <Drawer.Trigger asChild>
-              <button className="btn btn-outline-primary w-100">
-                + Add new item
-              </button>
-            </Drawer.Trigger>
-            <Drawer.Portal>
-              <Drawer.Overlay className="fixed inset-0 bg-black/40" />
-              <Drawer.Content className="bg-white flex flex-col fixed bottom-0 left-0 right-0 max-h-[82vh] rounded-t-[10px]">
-                <div className="max-w-md w-full mx-auto overflow-auto p-4">
-                  <Drawer.Handle />
-                  <Drawer.Title className="font-medium text-gray-900 my-6">
-                    Add Language
-                  </Drawer.Title>
-                  <input
-                    className="form-control mb-2"
-                    placeholder="Language"
-                    value={langForm.language}
-                    onChange={(e) =>
-                      setLangForm({ ...langForm, language: e.target.value })
-                    }
-                  />
-                  <input
-                    className="form-control mb-3"
-                    placeholder="Level"
-                    value={langForm.level}
-                    onChange={(e) =>
-                      setLangForm({ ...langForm, level: e.target.value })
-                    }
-                  />
-                  <button
-                    className="btn btn-dark w-100"
-                    onClick={() => {
-                      setLanguages([langForm, ...languages]);
-                      setLangForm({ language: "", level: "" });
-                      setLangOpen(false);
-                    }}
-                  >
-                    Save
-                  </button>
-                </div>
-              </Drawer.Content>
-            </Drawer.Portal>
-          </Drawer.Root>
+  <Drawer.Trigger asChild>
+    <button className="btn btn-outline-secondary w-100">
+      + Add new item
+    </button>
+  </Drawer.Trigger>
+  <Drawer.Portal>
+    <Drawer.Overlay className="fixed inset-0 bg-black/40" />
+    <Drawer.Content className="bg-secondaryx flex flex-col fixed bottom-0 left-0 right-0 max-h-[82vh] rounded-t-[10px]">
+      <div className="max-w-md w-full mx-auto overflow-auto p-4">
+        <Drawer.Handle />
+        <Drawer.Title className="font-medium text-gray-900 my-6">
+          Add Language
+        </Drawer.Title>
+        <input
+          className="form-control mb-2"
+          placeholder="Language"
+          value={langForm.language}
+          onChange={(e) =>
+            setLangForm({ ...langForm, language: e.target.value })
+          }
+        />
+        <select
+          className="form-control mb-3"
+          value={langForm.level}
+          onChange={(e) => setLangForm({ ...langForm, level: e.target.value })}
+        >
+          <option value="">Select Level</option>
+          <option value="Beginner">Beginner</option>
+          <option value="Intermediate">Intermediate</option>
+          <option value="Advanced">Advanced</option>
+          <option value="Fluent">Fluent</option>
+        </select>
+
+        <button
+          className="btn btn-secondary w-100"
+          onClick={() => {
+            if (!langForm.language || !langForm.level) return;
+            setLanguages([langForm, ...languages]);
+            setLangForm({ language: "", level: "" });
+            setLangOpen(false);
+          }}
+        >
+          Save
+        </button>
+      </div>
+    </Drawer.Content>
+  </Drawer.Portal>
+</Drawer.Root>
+
         </div>
       </div>
 
       {showResume && (
         <div className="mt-5">
-          <button type="button" onClick={handleDownloadPDF} className="btn btn-primary position-relative ">
-  DOWLON PDF <span className="position-absolute top-0 start-100 translate-middle badge border border-light rounded-circle bg-danger p-2"><span className="visually-hidden">DAWLON PDF</span></span>
-</button>
+          <button
+            type="button"
+            onClick={handleDownloadPDF}
+            className="btn btn-primary position-relative "
+          >
+            DOWLON PDF{" "}
+            <span className="position-absolute top-0 start-100 translate-middle badge border border-light rounded-circle bg-danger p-2">
+              <span className="visually-hidden">DAWLON PDF</span>
+            </span>
+          </button>
           <div
-            className="border p-4"
+            className="border p-4"         
             style={{ maxWidth: "800px", margin: "auto" }}
             ref={resumeRef}
           >
