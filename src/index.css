@@ -39,4 +39,24 @@
   .dark-mode .bg-secondaryx {
     background-color: #232425; /* Secondary'dan biroz qoraroq */
   }
-  
+ /* Light mode tugmalar (default) */
+.btn-outline-secondary {
+  border-color: #0d6efd; /* Bootstrap primary blue */
+  color: #0d6efd;
+}
+
+.btn-outline-secondary:hover {
+  background-color: #0d6efd;
+  color: white;
+}
+
+/* Dark mode tugmalar */
+.dark-mode .btn-outline-secondary {
+  border-color: #ffffff; 
+  color: #ffffff;
+}
+
+.dark-mode .btn-outline-secondary:hover {
+  background-color: #ffffff;
+  color: #121212;
+}

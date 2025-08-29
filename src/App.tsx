@@ -313,6 +313,11 @@ function App() {
                     }
                   ></textarea>
                   <button
+                  style={{
+                    borderColor: darkMode ? "#ffffff" : "#212529",
+                    color: darkMode ? "#ffffff" : "black",
+                    backgroundColor: darkMode ? "transparent" : "transparent",
+                  }}
                     className=" btn btn-secondary w-100"
                     onClick={() => {
                       setExperiences([form, ...experiences]);
@@ -370,7 +375,7 @@ function App() {
                     }
                   />
                   <textarea
-                    className="form-control mb-2"
+                    className="form-control mb-2" 
                     placeholder="Description"
                     value={projForm.description}
                     onChange={(e) =>
@@ -386,6 +391,11 @@ function App() {
                     }
                   />
                   <button
+                  style={{
+                    borderColor: darkMode ? "#ffffff" : "#212529",
+                    color: darkMode ? "#ffffff" : "black",
+                    backgroundColor: darkMode ? "transparent" : "transparent",
+                  }}
                     className="btn btn-secondary w-100"
                     onClick={() => {
                       setProjects([projForm, ...projects]);
@@ -452,7 +462,29 @@ function App() {
                       setEduForm({ ...eduForm, year: e.target.value })
                     }
                   />
+                  <input
+                  type="date"
+                    className="form-control mb-3"
+                    placeholder="date"
+                    value={eduForm.year}
+                    onChange={(e) =>
+                      setEduForm({ ...eduForm, year: e.target.value })
+                    }
+                  />
+                    <textarea
+                    className="form-control mb-3"
+                    placeholder="Description"
+                    value={form.description}
+                    onChange={(e) =>
+                      setForm({ ...form, description: e.target.value })
+                    }
+                  ></textarea>
                   <button
+                   style={{
+                     borderColor: darkMode ? "#ffffff" : "#212529",
+                     color: darkMode ? "#ffffff" : "black",
+                     backgroundColor: darkMode ? "transparent" : "transparent",
+                   }}
                     className="btn btn-secondary w-100"
                     onClick={() => {
                       setEducations([eduForm, ...educations]);
@@ -501,6 +533,11 @@ function App() {
                     onChange={(e) => setSkillForm({ skill: e.target.value })}
                   />
                   <button
+                   style={{
+                    borderColor: darkMode ? "#ffffff" : "#212529",
+                    color: darkMode ? "#ffffff" : "black",
+                    backgroundColor: darkMode ? "transparent" : "transparent",
+                  }}
                     className="btn btn-secondary w-100"
                     onClick={() => {
                       setSkills([skillForm, ...skills]);
@@ -562,7 +599,12 @@ function App() {
           <option value="Fluent">Fluent</option>
         </select>
 
-        <button
+        <button 
+         style={{
+           borderColor: darkMode ? "#ffffff" : "#212529",
+           color: darkMode ? "#ffffff" : "black",
+           backgroundColor: darkMode ? "transparent" : "transparent",
+         }}
           className="btn btn-secondary w-100"
           onClick={() => {
             if (!langForm.language || !langForm.level) return;
